@@ -52,7 +52,7 @@ void show_wrong_password_dialog() {
             GTK_DIALOG_DESTROY_WITH_PARENT,
             GTK_MESSAGE_INFO,
             GTK_BUTTONS_OK,
-            );
+            LOGIN_WINDOW_WRONG_PASSWORD_MESSAGE);
   gtk_window_set_title(GTK_WINDOW(dialog), LOGIN_WINDOW_WRONG_PASSWORD_TITLE);
   gtk_dialog_run(GTK_DIALOG(dialog));
   gtk_widget_destroy(dialog);
