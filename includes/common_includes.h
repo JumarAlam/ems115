@@ -1,25 +1,11 @@
-#ifndef SQLITE3_H
-#define SQLITE3_H
 #include <sqlite3.h>
-#endif
-
-#ifndef GTK_GTK_H
-#define GTK_GTK_H
 #include <gtk/gtk.h>
-#endif
-
-#ifndef STRING_H
-#define STRING_H
 #include <string.h>
-#endif
-
-#ifndef STDIO_H
-#define STDIO_H
 #include <stdio.h>
-#endif
 
 #include "struct.h"
 #include "ui_utils.h"
+#include "ui_messages.h"
 #include "login.h"
 #include "main_window.h"
 
