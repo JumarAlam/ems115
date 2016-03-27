@@ -46,7 +46,7 @@ void on_menu_help_about_activate(GtkObject *object, gpointer user_data) {
 }
 
 void on_about_dialog_response(GtkObject *object, gpointer user_data) {
-	gtk_widget_hide(about_dialog);
+	
 }
 
 void on_main_window_destroy(GtkObject *object, gpointer user_data) {

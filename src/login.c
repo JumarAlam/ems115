@@ -37,7 +37,6 @@ void show_forgot_password() {
 }
 
 void show_login() {
-	// g_builder = &builder;
 	login_window = GTK_WIDGET(gtk_builder_get_object(builder, "login_dialog"));
 	gtk_builder_connect_signals(builder, NULL);
 
@@ -60,7 +59,8 @@ void show_wrong_password_dialog() {
 }
 
 void on_btn_login_clicked(GtkObject *object, gpointer user_data) {
-	if(login(gtk_entry_get_text(txt_username), gtk_entry_get_text(txt_password))) {
+	if(login((char *)gtk_entry_get_text(txt_username),
+		     (char *)gtk_entry_get_text(txt_password))) {
 		gtk_widget_hide(login_window);
 		show_main_window();
 	} else {
