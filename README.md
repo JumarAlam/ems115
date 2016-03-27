@@ -12,6 +12,7 @@ libsqlite3 gtk+
 # Building
 
 ```
+mkdir build # if directory doesn't exist
 make
 ```
 
