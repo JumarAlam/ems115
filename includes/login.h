@@ -30,4 +30,8 @@ void show_wrong_password_dialog();
 void on_btn_login_clicked(GtkObject *object, gpointer user_data);
 void on_login_dialog_close(GtkObject *object, gpointer user_data);
 
+GtkWidget *login_window;
+GtkEntry *txt_username;
+GtkEntry *txt_password;
+
 #endif

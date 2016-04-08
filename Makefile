@@ -20,13 +20,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-CC := cc
+CC := clang
 EXECUTABLE := ems
 .DEFAULT_GOAL := ems
 
+# XXX: remove Wno-all
+
 CFLAGS := \
-	-Wall \
-	-Iincludes
+	-Wno-all \
+	-Wno-incompatible-pointer-types \
+	-Iincludes \
+	-g
 
 LDFLAGS := \
 	-lsqlite3
@@ -37,7 +41,8 @@ LOCAL_SRC_FILES := \
 	src/main.c \
 	src/login.c \
 	src/ui_utils.c \
-	src/main_window.c
+	src/main_window.c \
+	src/db_utils.c
 
 glade:
 	cp ui/*.glade build/

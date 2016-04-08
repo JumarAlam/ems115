@@ -1,17 +1,17 @@
-/* 
+/*
  * Copyright (c) 2016 Ashiqur Rahman <ashiqur.rahman05@northsouth.edu>
  *              Aniruddha Adhikary <aniruddha.adhikary@northsouth.edu>
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,12 +24,24 @@
 #include "common_includes.h"
 #include "login.h"
 
-GtkWidget *login_window;
-GtkEntry *txt_username;
-GtkEntry *txt_password;
-
 int login(char * username, char * password) {
-	return (strlen(username) > 0 && strlen(password) > 0);
+	char *sql;
+	char *zErrMsg = 0;
+	const char *data = "Callback function called";
+
+	asprintf(&sql,
+			 "SELECT user_id, user_name, role from portal_user where user_name='%s' AND password='%s' LIMIT 1;",
+			 username, password);
+
+	rc = sqlite3_exec(db, sql, login_callback, (void *) data, &zErrMsg);
+
+	if (rc != SQLITE_OK) {
+		show_wrong_password_dialog();
+		sqlite3_free(zErrMsg);
+	} else {
+		
+	}
+	// return (strlen(username) > 0 && strlen(password) > 0);
 }
 
 void show_forgot_password() {
@@ -43,7 +55,7 @@ void show_login() {
 	txt_username = GTK_ENTRY(gtk_builder_get_object(builder, "txt_username"));
 	txt_password = GTK_ENTRY(gtk_builder_get_object(builder, "txt_password"));
 
-	gtk_widget_show(login_window);
+	gtk_widget_show_all(login_window);
 }
 
 void show_wrong_password_dialog() {
@@ -59,13 +71,8 @@ void show_wrong_password_dialog() {
 }
 
 void on_btn_login_clicked(GtkObject *object, gpointer user_data) {
-	if(login((char *)gtk_entry_get_text(txt_username),
-		     (char *)gtk_entry_get_text(txt_password))) {
-		gtk_widget_hide(login_window);
-		show_main_window();
-	} else {
-		show_wrong_password_dialog();
-	}
+	login((char *)gtk_entry_get_text(txt_username),
+		     (char *)gtk_entry_get_text(txt_password));
 }
 
 void on_login_dialog_close(GtkObject *object, gpointer user_data) {

@@ -1,0 +1,1 @@
+int login_callback(void *data, int argc, char **argv, char **azColName);

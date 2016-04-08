@@ -21,9 +21,19 @@
  * SOFTWARE.
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+ #include "common_includes.h"
 
-int main(int argc, char * argv[]);
+ struct Employee get_employee_info__(int id) {
+    struct Employee employee;
 
-#endif
+    employee.id = 0;
+    employee.name = "Silvia Ahmed";
+    employee.designation = "Lecturer";
+    employee.salary = 1000000;
+
+    return employee;
+ }
+
+ int save_employee_info(struct Employee employee) {
+    return printf("%s", employee.name);
+ }
